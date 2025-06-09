@@ -32,36 +32,95 @@ body {
 
 /* Navbar */
 .navbar {
-  background: #fff !important;
-  padding: 24px 0;
+  position: fixed;
+  top: 0; left: 0; width: 100%;
+  background: #f8f9fa;
+  box-shadow: 0 1px 12px #e2e8f045;
+  border-bottom: 1.5px solid #e2e7f2;
+  min-height: 60px;
+  z-index: 200;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-content {
+  width: 100%;
+  max-width: 950px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  box-sizing: border-box;
+}
+
+/* Left: App Title */
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-title {
+  font-size: 20px;
+  font-family: 'Raleway', 'Inter', sans-serif;
+  font-weight: 700;
+  color: #4677d8;
+  letter-spacing: 1px;
+  user-select: none;
+}
+
+/* Right: Profile Icon */
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-profile {
+  font-size: 22px;
+  color: #b0bacb;
+  background: #fff;
+  border-radius: 50%;
+  width: 36px; height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-bottom: none;
-  box-shadow: var(--shadow-main);
-  border-radius: 0 0 36px 36px;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  left: 0;
-  z-index: 100;
+  box-shadow: 0 1px 7px #e1eaff66;
+  border: 1.5px solid #f2f4fa;
+  cursor: pointer;
+  transition: background 0.15s, box-shadow 0.15s;
+}
+.navbar-profile:hover {
+  background: #e7f6ff;
+  color: #4C6387;
 }
 
-.logo-symbol {
-  font-size: 32px;
-  color: var(--primary);
-}
-
-.logo {
-  font-size: 1.4rem;
-  font-family: 'Raleway', 'Inter', sans-serif;
-  font-weight: 700;
-  color: #5587f3;
-  letter-spacing: 2px;
+/* Center main content below navbar */
+.app {
+  min-height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 8px;
+  padding-top: 76px; /* add space for navbar */
 }
+
+/* Container centers everything and makes responsive */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .navbar-content {
+    padding: 0 10px;
+  }
+}
+
+/* ...rest of existing styles... */
 
 /* Container centers everything and makes responsive */
 .container {

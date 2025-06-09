@@ -132,18 +132,14 @@ function App() {
   // --- Main UI ---
   return (
     <div className="app" style={{ justifyContent: 'center', alignItems: 'center', minHeight: '100vh', background: 'linear-gradient(120deg, #f6f8fc 0%, #e7f6ff 100%)' }}>
-      <nav className="navbar" style={{ background: '#ffffffcc', boxShadow: '0 2px 24px #d2e6fb56', borderRadius: '0 0 36px 36px' }}>
-        <div className="container" style={{ display: 'flex', justifyContent: 'center' }}>
-          <div className="logo" style={{
-            fontFamily: 'Raleway, Inter, sans-serif',
-            letterSpacing: '2px',
-            fontSize: '1.4rem',
-            color: '#5587f3',
-            alignItems: 'center',
-            fontWeight: 700
-          }}>
-            <span className="logo-symbol" style={{ color: '#AFB4FF', fontSize: 32, marginRight: 10, position: 'relative', top: 1 }}>🌈</span>
-            StreakFlow
+      {/* Top Navigation Bar */}
+      <nav className="navbar">
+        <div className="container navbar-content">
+          <div className="navbar-left">
+            <span className="navbar-title">📈 StreakFlow</span>
+          </div>
+          <div className="navbar-right">
+            <span className="navbar-profile" title="Profile">👤</span>
           </div>
         </div>
       </nav>
