@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import AddNewHabitCard from './AddNewHabitCard';
+import HabitCardList from './HabitCardList';
 
 // PUBLIC_INTERFACE
 function App() {
@@ -58,6 +59,22 @@ function App() {
         };
       }),
     );
+  }
+
+  // PUBLIC_INTERFACE
+  // Simple onToggleDone for "Done for Today" checkbox
+  function handleToggleDone(habitId) {
+    markHabitDone(habitId, todayISO);
+  }
+
+  // PUBLIC_INTERFACE
+  function handleDeleteHabit(habitId) {
+    setHabits(habits => habits.filter(h => h.id !== habitId));
+  }
+  // PUBLIC_INTERFACE
+  function handleEditHabit(habitId) {
+    // Placeholder for edit logic
+    alert("Edit habit feature coming soon! (habitId: " + habitId + ")");
   }
 
   // Helper to get all days in a given month/year
@@ -186,94 +203,12 @@ function App() {
           </section>
           {/* Habits list */}
           <section style={{ width: "100%", maxWidth: 900, margin: "0 auto" }}>
-            {habits.length === 0 &&
-              <div style={{
-                margin: '54px 0 0 0',
-                color: '#bcbcf8',
-                textAlign: 'center',
-                fontSize: 18,
-              }}>
-                No habits yet.<br />Add your first habit using the card above!
-              </div>
-            }
-            <ul style={{
-              listStyle: 'none',
-              padding: 0,
-              margin: 0,
-              display: 'flex',
-              flexWrap: 'wrap',
-              gap: 22,
-              justifyContent: 'center'
-            }}>
-              {habits.map((habit, idx) => (
-                <li key={habit.id} style={{
-                  background: pastelPalette[idx % pastelPalette.length],
-                  borderRadius: "24px",
-                  boxShadow: "0 9px 32px #7f9ccf22",
-                  padding: '28px 24px 22px 24px',
-                  minWidth: 290,
-                  minHeight: 130,
-                  marginBottom: 8,
-                  flex: '1 1 320px',
-                  maxWidth: 372,
-                  position: 'relative',
-                  display: "flex",
-                  flexDirection: "column"
-                }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                    <span style={{
-                      fontWeight: 650,
-                      fontSize: '1.08rem',
-                      color: '#4C6387',
-                      textShadow: '0 1px 0 #fff9',
-                      flex: 1
-                    }}>
-                      {habit.name}
-                    </span>
-                    <span className="habit-frequency" style={{ fontSize: 13, fontWeight: 500, color: "#B1BACB", marginLeft: 7, background: "#f7f7ff", borderRadius: 8, padding: '2px 9px' }}>{habit.frequency}</span>
-                  </div>
-                  {/* Streak display */}
-                  <div style={{
-                    display: 'flex',
-                    gap: 25,
-                    marginTop: 12,
-                    alignItems: 'center'
-                  }}>
-                    <span style={{
-                      fontSize: 26,
-                      fontWeight: 800,
-                      color: '#4CAF50',
-                      letterSpacing: '-1px'
-                    }}>
-                      🔥 {habit.streak || 0}
-                    </span>
-                    <div style={{
-                      fontSize: 13,
-                      color: '#7A90A8',
-                      fontWeight: 500
-                    }}>
-                      Current streak
-                      <br />
-                      <span style={{ color: '#5587f3', fontWeight: 700 }}>
-                        Best: {habit.bestStreak || 0}
-                      </span>
-                    </div>
-                  </div>
-                  {/* Calendar preview */}
-                  <div style={{ marginTop: 18, marginBottom: -10 }}>
-                    <MiniHabitCalendar
-                      habit={habit}
-                      allDays={allDays}
-                      calendarMonth={calendarMonth}
-                      calendarYear={calendarYear}
-                      onMarkDone={markHabitDone}
-                      cellStyle={calendarCellStyle}
-                      todayISO={todayISO}
-                    />
-                  </div>
-                </li>
-              ))}
-            </ul>
+            <HabitCardList
+              habits={habits}
+              onToggleDone={handleToggleDone}
+              onEdit={handleEditHabit}
+              onDelete={handleDeleteHabit}
+            />
           </section>
           {/* Month controls */}
           <section style={{
