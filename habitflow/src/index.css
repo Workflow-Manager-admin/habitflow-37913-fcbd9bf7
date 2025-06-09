@@ -1,3 +1,6 @@
+/* Import Poppins/Inter font families */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap');
+
 /* Base resets and coding styles */
 * {
   box-sizing: border-box;
@@ -6,11 +9,18 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  min-height: 100vh;
+  /* Pastel background */
+  background: var(--pastel-bg, #f2f6f9);
+  font-family: var(--font-family, 'Poppins', 'Inter', sans-serif);
+  font-size: var(--base-font-size, 16px);
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: var(--text-color, #4C6387);
+  letter-spacing: 0px;
+  line-height: 1.6;
+  transition: background 0.25s;
 }
 
 code {
