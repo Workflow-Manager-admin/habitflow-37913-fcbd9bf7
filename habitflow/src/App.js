@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import './App.css';
 import AddNewHabitCard from './AddNewHabitCard';
 import HabitCardList from './HabitCardList';
+import CalendarSection from './CalendarSection';
 
 // PUBLIC_INTERFACE
 function App() {
@@ -210,6 +211,17 @@ function App() {
               onDelete={handleDeleteHabit}
             />
           </section>
+
+          {/* Calendar Section - Month View */}
+          <section style={{ width: "100%", maxWidth: 900, margin: "38px auto 0 auto" }}>
+            <CalendarSection
+              habits={habits}
+              calendarMonth={calendarMonth}
+              calendarYear={calendarYear}
+              todayISO={todayISO}
+            />
+          </section>
+
           {/* Month controls */}
           <section style={{
             margin: '42px auto 0 auto',
