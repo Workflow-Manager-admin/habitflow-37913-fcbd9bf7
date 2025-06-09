@@ -63,6 +63,10 @@ function HabitCard({
           Best: <b>{habit.bestStreak || 0}</b>
         </span>
       </div>
+
+      {/* Streak progress bar */}
+      <StreakProgressBar streak={habit.streak || 0} goal={21} />
+
       <div className="habit-card-footer">
         <label className="habit-card-checkbox-label">
           <input
@@ -75,6 +79,32 @@ function HabitCard({
           Done for Today
         </label>
       </div>
+    </div>
+  );
+}
+
+// PUBLIC_INTERFACE
+function StreakProgressBar({ streak, goal }) {
+  /**
+   * This renders a minimalist, rounded, animated progress bar with percent label.
+   * - streak: current streak value (integer)
+   * - goal: maximum achievable streak for the progress bar (integer, e.g., 21)
+   */
+  const pct = goal === 0 ? 0 : Math.min(100, Math.round((streak / goal) * 100));
+  return (
+    <div className="habit-streak-progress-wrapper">
+      <div className="habit-streak-progress-bar-bg">
+        <div
+          className="habit-streak-progress-bar"
+          style={{
+            width: `${pct}%`,
+            transition: "width 0.6s cubic-bezier(.63,1.43,.57,.93)",
+          }}
+          aria-label={`Streak progress: ${streak} of ${goal} days`}
+        />
+      </div>
+      <span className="habit-streak-progress-label">{pct}%</span>
+      <span className="habit-streak-progress-caption">{streak}/{goal} days</span>
     </div>
   );
 }

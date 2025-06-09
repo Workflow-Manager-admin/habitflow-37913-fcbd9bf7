@@ -646,6 +646,75 @@ li {
   margin-left: 15px;
 }
 
+/* === Streak Progress Bar below habit card === */
+.habit-streak-progress-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  margin-bottom: -4px;
+  min-height: 28px;
+}
+
+.habit-streak-progress-bar-bg {
+  flex: 1;
+  min-width: 74px;
+  max-width: 200px;
+  height: 14px;
+  background: linear-gradient(90deg, #f7f8ff 74%, #D7FFC755 100%);
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 1px 6px #b2f7ef28;
+}
+
+.habit-streak-progress-bar {
+  height: 100%;
+  background: linear-gradient(93deg, #AFB4FF 5%, #B2F7EF 80%, #FFD7D9 100%);
+  border-radius: 8px;
+  transition: width 0.6s cubic-bezier(.63,1.43,.57,.93);
+  box-shadow: 0 2px 8px #AFB4FF28;
+}
+
+.habit-streak-progress-label {
+  font-size: 0.92rem;
+  color: #669292;
+  font-weight: 700;
+  background: #F7FAFFcc;
+  border-radius: 7px;
+  padding: 1px 7px 1px 7px;
+  letter-spacing: 0px;
+  box-shadow: 0 1px 5px #C7E6FF20;
+  margin-left: 2px;
+  white-space: nowrap;
+}
+
+.habit-streak-progress-caption {
+  font-size: 0.85rem;
+  color: #b0bacb;
+  margin-left: 2px;
+  background: #fffdfc66;
+  border-radius: 4px;
+  padding: 0 5px 0 5px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+/* Mobile/adaptive: stack streak bar and label */
+@media (max-width:500px) {
+  .habit-streak-progress-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+    min-height: 30px;
+  }
+  .habit-streak-progress-caption {
+    margin-left: 0;
+    margin-top: 0.5px;
+  }
+}
+
 /* Footer: checkbox and streak */
 .habit-card-footer {
   margin-top: 17px;
