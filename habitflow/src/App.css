@@ -122,6 +122,124 @@ body {
 
 /* ...rest of existing styles... */
 
+/* Add New Habit Card styles */
+.add-habit-card-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 240px;
+  margin-top: 32px; /* vertical spacing from navbar */
+  margin-bottom: 38px;
+}
+
+.add-habit-card {
+  width: 300px;
+  background: var(--card-bg, #fff);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px 0 #B2F7EF55, 0 2px 10px #AFB4FF15;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 30px 26px 24px 26px;
+  gap: 13px;
+  border: 1.2px solid rgba(175,180,255,0.08);
+  animation: fadeInScale 0.29s cubic-bezier(.38,1.7,.84,.97);
+}
+
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(.95);}
+  to   { opacity: 1; transform: scale(1);}
+}
+
+.add-habit-title {
+  font-size: 1.45rem;
+  font-weight: 700;
+  font-family: 'Raleway', 'Inter', sans-serif;
+  color: #6587ff;
+  margin-bottom: 10px;
+  letter-spacing: -1px;
+  text-align: center;
+}
+
+.add-habit-label {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #65939D;
+  margin-bottom: -4px;
+  margin-top: 6px;
+  letter-spacing: 0.1px;
+}
+
+.add-habit-input,
+.add-habit-select {
+  width: 100%;
+  margin-bottom: 0;
+  margin-top: 2.5px;
+  padding: 10px 13px;
+  border-radius: 12px;
+  border: 2px solid var(--primary);
+  font-size: 1.03rem;
+  background: #f7f8ff;
+  color: #263D51;
+  outline: none;
+  transition: border 0.15s;
+}
+.add-habit-input:focus,
+.add-habit-select:focus {
+  border: 2.2px solid #AFB4FF;
+  background: #ecf4ff;
+}
+
+.add-habit-select {
+  appearance: none;
+  -webkit-appearance: none;
+  background: linear-gradient(93deg, #f7f8ff 75%, #F7D7FF15 100%);
+  font-family: inherit;
+  font-weight: 500;
+}
+
+/* Stylish colorful Add Habit button */
+.add-habit-btn {
+  margin-top: 16px;
+  background: linear-gradient(92deg, #C7E6FF 5%, #AFB4FF 48%, #FFD7D9 93%);
+  color: #436DDD;
+  border: none;
+  border-radius: 16px;
+  padding: 13px 0;
+  font-size: 1.09rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  box-shadow: 0 2px 10px #D7FFC740, 0 3px 18px #AFB4FF17;
+  transition: background 0.15s, transform 0.12s, box-shadow 0.12s;
+}
+
+.add-habit-btn:hover {
+  background: linear-gradient(95deg, #AFB4FF 24%, #D7FFC7 75%);
+  color: #1A2359;
+  transform: translateY(-1.5px) scale(1.035);
+  box-shadow: 0 5px 24px #B2F7EF55;
+}
+
+.add-habit-error {
+  background: #FFD7D988;
+  color: #D65070;
+  border-radius: 8px;
+  padding: 4px 8px;
+  font-size: 0.98rem;
+  margin: 6px 0 0 0;
+  text-align: center;
+  font-weight: 500;
+}
+
+@media (max-width: 400px) {
+  .add-habit-card {
+    min-width: unset;
+    width: 97vw;
+    padding-left: 7vw;
+    padding-right: 7vw;
+  }
+}
 /* Container centers everything and makes responsive */
 .container {
   max-width: 900px;

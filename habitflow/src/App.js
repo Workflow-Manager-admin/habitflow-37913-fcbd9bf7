@@ -1,35 +1,33 @@
+// PUBLIC_INTERFACE
 import React, { useState } from 'react';
 import './App.css';
+import AddNewHabitCard from './AddNewHabitCard';
 
 // PUBLIC_INTERFACE
 function App() {
-  // State for list of habits, habit form, and selected calendar month
+  // State for list of habits and selected calendar month/year
   const [habits, setHabits] = useState([]);
-  const [newHabitName, setNewHabitName] = useState('');
-  const [habitFormOpen, setHabitFormOpen] = useState(false);
   const [calendarMonth, setCalendarMonth] = useState(new Date().getMonth());
   const [calendarYear, setCalendarYear] = useState(new Date().getFullYear());
 
   // Get today's date ISO (yyyy-mm-dd)
   const todayISO = new Date().toISOString().slice(0, 10);
 
-  // Add a new habit
   // PUBLIC_INTERFACE
-  function addHabit(e) {
-    e.preventDefault();
-    if (!newHabitName.trim()) return;
+  // Add a new habit. Expects {name, frequency, startDate}
+  function addHabit({ name, frequency, startDate }) {
     setHabits([
       ...habits,
       {
         id: Date.now(),
-        name: newHabitName.trim(),
+        name,
+        frequency,
+        startDate,
         streak: 0,
         bestStreak: 0,
         calendar: {}, // { yyyy-mm-dd: true }
       },
     ]);
-    setNewHabitName('');
-    setHabitFormOpen(false);
   }
 
   // PUBLIC_INTERFACE
@@ -143,9 +141,20 @@ function App() {
           </div>
         </div>
       </nav>
-
       <main>
-        <div className="container" style={{ paddingTop: 120, paddingBottom: 48, display: 'flex', flexDirection: 'column', alignItems: 'center', minHeight: '60vh' }}>
+        <div
+          className="container"
+          style={{
+            paddingTop: 90,
+            paddingBottom: 48,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            minHeight: "60vh"
+          }}
+        >
+          {/* Add Habit Card - always visible, centered */}
+          <AddNewHabitCard onAdd={addHabit} />
           {/* Dashboard header */}
           <section style={{
             background: '#fff',
@@ -174,94 +183,7 @@ function App() {
             }}>
               Stay consistent, build better habits—see your streaks grow!
             </div>
-            {/* Add habit button */}
-            <button
-              onClick={() => setHabitFormOpen(true)}
-              className="btn btn-large"
-              style={{
-                marginTop: 18,
-                background: 'linear-gradient(90deg, #AFB4FF 25%, #B2F7EF 90%)',
-                color: '#436DDD',
-                fontWeight: 700,
-                fontSize: '1.12rem',
-                boxShadow: '0 4px 16px #86bcee33',
-                borderRadius: '16px'
-              }}
-            >
-              + Add Habit
-            </button>
           </section>
-
-          {/* Habit creation modal */}
-          {habitFormOpen && (
-            <div style={{
-              position: 'fixed',
-              zIndex: 1000,
-              left: 0,
-              top: 0,
-              width: '100vw',
-              height: '100vh',
-              background: 'rgba(140,175,255,0.20)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}>
-              <form
-                style={{
-                  background: '#fff',
-                  borderRadius: '18px',
-                  boxShadow: '0 4px 18px #AFB4FF32',
-                  padding: '34px 24px 28px 24px',
-                  minWidth: 310,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  gap: 24
-                }}
-                onSubmit={addHabit}
-              >
-                <label htmlFor="habitName" style={{ fontWeight: 500, color: '#5D66A6', marginBottom: -10, fontSize: 18 }}>Habit name:</label>
-                <input
-                  id="habitName"
-                  value={newHabitName}
-                  onChange={e => setNewHabitName(e.target.value)}
-                  autoFocus
-                  placeholder="e.g. Drink water"
-                  maxLength={32}
-                  style={{
-                    padding: '11px 18px',
-                    width: 220,
-                    border: '2px solid #AFB4FF',
-                    borderRadius: '12px',
-                    fontSize: '1.08rem',
-                    outline: 'none',
-                    marginBottom: 0
-                  }}
-                />
-                <div style={{ display: 'flex', gap: 8, marginTop: 8 }}>
-                  <button
-                    type="submit"
-                    className="btn"
-                    style={{
-                      background: 'linear-gradient(90deg, #D7FFC7 30%, #AFB4FF 85%)',
-                      color: '#436DDD', borderRadius: 12, fontWeight: 600
-                    }}
-                  >
-                    Add
-                  </button>
-                  <button
-                    type="button"
-                    className="btn"
-                    style={{ background: '#FFD7D988', color: '#7A90A8', borderRadius: 12 }}
-                    onClick={() => setHabitFormOpen(false)}
-                  >
-                    Cancel
-                  </button>
-                </div>
-              </form>
-            </div>
-          )}
-
           {/* Habits list */}
           <section style={{ width: "100%", maxWidth: 900, margin: "0 auto" }}>
             {habits.length === 0 &&
@@ -271,7 +193,7 @@ function App() {
                 textAlign: 'center',
                 fontSize: 18,
               }}>
-                No habits yet.<br />Click <span style={{ fontWeight: 640, color: '#a9d6c4' }}>+ Add Habit</span> to start!
+                No habits yet.<br />Add your first habit using the card above!
               </div>
             }
             <ul style={{
@@ -308,6 +230,7 @@ function App() {
                     }}>
                       {habit.name}
                     </span>
+                    <span className="habit-frequency" style={{ fontSize: 13, fontWeight: 500, color: "#B1BACB", marginLeft: 7, background: "#f7f7ff", borderRadius: 8, padding: '2px 9px' }}>{habit.frequency}</span>
                   </div>
                   {/* Streak display */}
                   <div style={{
